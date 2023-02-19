@@ -13,13 +13,14 @@ import util.JPAUtil;
 public class RivistaDao {
 	static Logger log = LoggerFactory.getLogger(RivistaDao.class);
 
-    public void add(Rivista rivista) {
+    public static void add(Rivista rivista) {
     	EntityManager em = JPAUtil.getEntityManager();
 		
 		try {
 			em.getTransaction().begin();
 			em.persist(rivista);
 			em.getTransaction().commit();
+			System.out.println("Magazine added");
 		} catch (Exception ec) {
 			em.getTransaction().rollback();
 			log.error(ec.getMessage());
@@ -29,13 +30,14 @@ public class RivistaDao {
     	
     }
 
-    public void remove(String isbn) {
+    public static void remove(String isbn) {//da guardare
     	EntityManager em = JPAUtil.getEntityManager();
     	
     	try {
 			em.getTransaction().begin();
 			em.remove(isbn);
 			em.getTransaction().commit();
+			System.out.println("Magazine removed");
 		} catch (Exception ec) {
 			em.getTransaction().rollback();
 			log.error(ec.getMessage());
@@ -44,40 +46,56 @@ public class RivistaDao {
 		}
     }
 
-    public Rivista findByIsbn(String isbn) {
+    public static Rivista findByIsbn(String isbn) {
     	EntityManager em = JPAUtil.getEntityManager();
     	try {
 			em.getTransaction().begin();
-			return em.find(Rivista.class, isbn);
+			Rivista rivista = em.find(Rivista.class, isbn);
+			System.out.println("Magazine found: " + rivista.getIsbn());
+			return rivista;
+    	} catch (Exception ec) {
+			System.out.println(ec.getMessage());
 		} finally {
 			em.close();
 		}
+    	return null;
     }
 
-    public List<Rivista> findByYear(int year){
+    public static List<Rivista> findByYear(int year){
     	EntityManager em = JPAUtil.getEntityManager();
+    	@SuppressWarnings("unchecked")
+		List<Rivista> riviste = (List<Rivista>) em.find(Rivista.class, year);
     	try {
 			em.getTransaction().begin();
-			return (List<Rivista>) em.find(Rivista.class, year);
+			for(Rivista rivista : riviste) {
+			System.out.println("Book found by year: " + rivista.getTitolo());
+			}
+			return riviste;
+    	} catch (Exception ec) {
+			System.out.println(ec.getMessage());
 		} finally {
 			em.close();
 		}
+    	return null;
     }
 
-    public List<Rivista> findByTitle(String title){
+    public static List<Rivista> findByTitle(String title){
     	EntityManager em = JPAUtil.getEntityManager();
+    	@SuppressWarnings("unchecked")
+		List<Rivista> riviste = (List<Rivista>) em.find(Rivista.class, title);
     	try {
 			em.getTransaction().begin();
-			return (List<Rivista>) em.find(Rivista.class, title);
+			for(Rivista rivista : riviste) {
+			System.out.println("Book found by title: " + rivista.getTitolo());
+			}
+			return riviste;
+    	} catch (Exception ec) {
+			System.out.println(ec.getMessage());
 		} finally {
 			em.close();
 		}
+    	return null;
     }
 
-    //public List<Rivista> findAll();
-
-    //public List<Rivista> findAvailable(){
-    	
-    
 
 }

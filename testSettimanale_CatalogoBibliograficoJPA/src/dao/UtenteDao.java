@@ -1,13 +1,10 @@
 package dao;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import model.Libro;
 import model.Utente;
 import util.JPAUtil;
 
@@ -15,7 +12,7 @@ public class UtenteDao {
 	static Logger log = LoggerFactory.getLogger(UtenteDao.class);
 
 
-    public void add(Utente utente) {
+    public static void add(Utente utente) {
     	EntityManager em = JPAUtil.getEntityManager();
 		
 		try {
@@ -31,7 +28,7 @@ public class UtenteDao {
     	
     }
 
-    public void remove(int tessera) {
+    public static void remove(int tessera) {
     	EntityManager em = JPAUtil.getEntityManager();
     	
     	try {
@@ -47,7 +44,7 @@ public class UtenteDao {
     	
     }
 
-    public Utente findByTessera(int tessera){
+    public static Utente findByTessera(int tessera){
     	EntityManager em = JPAUtil.getEntityManager();
     	try {
 			em.getTransaction().begin();
@@ -57,6 +54,5 @@ public class UtenteDao {
 		}
     	
     }
-    //public List<Utente> findAll();
 
 }

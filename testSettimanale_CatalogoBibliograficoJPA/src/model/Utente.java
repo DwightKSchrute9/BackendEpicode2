@@ -3,37 +3,53 @@ package model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQuery(name = "Utente.findAll", query = "SELECT u FROM Utente u")
+@Table (name = "Utente")
 public class Utente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id_tessera")
+    private int idTessera;
 
+    @Column(name = "nome")
     private String nome;
+    
+    @Column(name = "cognome")
     private String cognome;
 
-    @Temporal(TemporalType.DATE)
-    private Date dataNascita;
-
-    private String numeroTessera;
+    @Column(name = "data_nascita")
+    private String dataNascita;
 
     @OneToMany(mappedBy = "utente")
     private List<Prestito> prestiti;
+    
+    public Utente() {}
+    
+    public Utente(int idTessera, String nome, String cognome, String dataNascita) {
+    	this.idTessera = idTessera;
+    	this.nome = nome;
+    	this.cognome = cognome;
+    	this.dataNascita = dataNascita;
+    }
 
-	public int getId() {
-		return id;
+	public int getIdTessera() {
+		return idTessera;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdTessera(int idTessera) {
+		this.idTessera = idTessera;
 	}
 
 	public String getNome() {
@@ -52,20 +68,12 @@ public class Utente {
 		this.cognome = cognome;
 	}
 
-	public Date getDataDiNascita() {
+	public String getDataNascita() {
 		return dataNascita;
 	}
 
-	public void setDataDiNascita(Date dataDiNascita) {
-		this.dataNascita = dataDiNascita;
-	}
-
-	public String getNumeroTessera() {
-		return numeroTessera;
-	}
-
-	public void setNumeroTessera(String numeroTessera) {
-		this.numeroTessera = numeroTessera;
+	public void setDataNascita(String dataNascita) {
+		this.dataNascita = dataNascita;
 	}
 
 	public List<Prestito> getPrestiti() {
@@ -76,5 +84,6 @@ public class Utente {
 		this.prestiti = prestiti;
 	}
 
+	
     
 }

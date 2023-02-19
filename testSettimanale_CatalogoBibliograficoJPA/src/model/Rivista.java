@@ -1,47 +1,89 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQuery(name = "Rivista.findAll", query = "SELECT r FROM Rivista r") //check
 @Table (name = "Rivista")
-public class Rivista extends ElementoCatalogo {
+public class Rivista {
 	
-    @ManyToOne
-    @JoinColumn(name = "catalogo_id")
-    private Catalogo catalogo;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "isbn")
+    private String isbn;
+    
+	@Column(name = "titolo")
+    private String titolo;
+    
+	@Column(name = "anno")
+    private int annoPubblicazione;
+	
+	@Column(name = "pagine")
+    private int numPagine;
+    
+	@Enumerated(EnumType.STRING)
+	@Column(name = "periodicita")
     private Periodicita periodicita;
-
+	
     public Rivista() {
-        super();
+
     }
 
     public Rivista(String isbn, String titolo, int annoPubblicazione, int numPagine, Periodicita periodicita) {
-        super(isbn, titolo, annoPubblicazione, numPagine);
+    	this.isbn = isbn;
+    	this.titolo = titolo;
+    	this.annoPubblicazione = annoPubblicazione;
+    	this.numPagine = numPagine;
         this.periodicita = periodicita;
     }
 
-    public Periodicita getPeriodicita() {
-        return periodicita;
-    }
-
-    public void setPeriodicita(Periodicita periodicita) {
-        this.periodicita = periodicita;
-    }
-    public Catalogo getCatalogo() {
-        return catalogo;
-    }
-
-    @Override
-	public String toString() {
-		return "Rivista [catalogo=" + catalogo + ", periodicita=" + periodicita + "]";
+	public String getIsbn() {
+		return isbn;
 	}
 
-	public void setCatalogo(Catalogo catalogo) {
-        this.catalogo = catalogo;
-    }
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
+	}
+
+	public int getAnnoPubblicazione() {
+		return annoPubblicazione;
+	}
+
+	public void setAnnoPubblicazione(int annoPubblicazione) {
+		this.annoPubblicazione = annoPubblicazione;
+	}
+
+	public int getNumPagine() {
+		return numPagine;
+	}
+
+	public void setNumPagine(int numPagine) {
+		this.numPagine = numPagine;
+	}
+
+	public Periodicita getPeriodicita() {
+		return periodicita;
+	}
+
+	public void setPeriodicita(Periodicita periodicita) {
+		this.periodicita = periodicita;
+	}
+
 
 }
