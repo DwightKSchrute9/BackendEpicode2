@@ -1,68 +1,66 @@
 package model;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public abstract class CatalogoItem {
-
+public class Catalogo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String isbn;
-    private String titolo;
-    private int annoPubblicazione;
-    private int numPagine;
+    private int id;
 
-    public CatalogoItem() {
+    @OneToMany(mappedBy = "catalogo")
+    private List<Libro> libri;
+
+    @OneToMany(mappedBy = "catalogo")
+    private List<Rivista> riviste;
+
+    public Catalogo() {
+        this.libri = new ArrayList<>();
+        this.riviste = new ArrayList<>();
     }
 
-    public CatalogoItem(String isbn, String titolo, int annoPubblicazione, int numPagine) {
-        this.isbn = isbn;
-        this.titolo = titolo;
-        this.annoPubblicazione = annoPubblicazione;
-        this.numPagine = numPagine;
+    public List<Libro> getLibri() {
+        return libri;
     }
 
-    public Long getId() {
-        return id;
+    public List<Rivista> getRiviste() {
+        return riviste;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public void aggiungiLibro(Libro libro) {
+        this.libri.add(libro);
+        libro.setCatalogo(this);
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void rimuoviLibro(Libro libro) {
+        this.libri.remove(libro);
+        libro.setCatalogo(null);
     }
 
-    public String getTitolo() {
-        return titolo;
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void aggiungiRivista(Rivista rivista) {
+        this.riviste.add(rivista);
+        rivista.setCatalogo(this);
     }
 
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
+    public void rimuoviRivista(Rivista rivista) {
+        this.riviste.remove(rivista);
+        rivista.setCatalogo(null);
     }
 
-    public int getAnnoPubblicazione() {
-        return annoPubblicazione;
-    }
-
-    public void setAnnoPubblicazione(int annoPubblicazione) {
-        this.annoPubblicazione = annoPubblicazione;
-    }
-
-    public int getNumPagine() {
-        return numPagine;
-    }
-
-    public void setNumPagine(int numPagine) {
-        this.numPagine = numPagine;
-    }
-
+    // implementazione dei metodi di ricerca
 }

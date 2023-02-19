@@ -1,19 +1,34 @@
 package model;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
+
+//@NamedQuery (name = "prestitoBytessera", query = "SELECT p FROM Prestito p where p.utente.numeroTessera = :nt")
+//@NamedQuery (name = "prestitiScaduti", query = "SELECT p FROM Prestito p WHERE (dataRestituzionePrev > CURRENT DATE AND dataRestituzioneEff IS NULL)")
 public class Prestito {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     
     @ManyToOne
     private Utente utente;
     
     @ManyToOne
     @JoinColumn(name = "catalogoItem_id")
-    private CatalogoItem catalogoItem;
+    private ElementoCatalogo catalogoItem;
     
     @Temporal(TemporalType.DATE)
     private Date dataInizioPrestito;
@@ -26,7 +41,7 @@ public class Prestito {
 
     public Prestito() {}
 
-    public Prestito(Utente utente, CatalogoItem catalogoItem, Date dataInizioPrestito) {
+    public Prestito(Utente utente, ElementoCatalogo catalogoItem, Date dataInizioPrestito) {
         this.utente = utente;
         this.catalogoItem = catalogoItem;
         this.dataInizioPrestito = dataInizioPrestito;
@@ -36,11 +51,11 @@ public class Prestito {
         this.dataRestituzionePrevista = c.getTime();
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -52,11 +67,11 @@ public class Prestito {
         this.utente = utente;
     }
 
-    public CatalogoItem getCatalogoItem() {
+    public ElementoCatalogo getCatalogoItem() {
         return catalogoItem;
     }
 
-    public void setCatalogoItem(CatalogoItem catalogoItem) {
+    public void setCatalogoItem(ElementoCatalogo catalogoItem) {
         this.catalogoItem = catalogoItem;
     }
 
