@@ -4,10 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import model.Biglietto;
 
-public abstract class BigliettoDaoImp<endDate> implements BigliettoDao {
+public class BigliettoDaoImp implements BigliettoDao {
 
     private EntityManager entityManager;
 
@@ -25,7 +26,8 @@ public abstract class BigliettoDaoImp<endDate> implements BigliettoDao {
         entityManager.merge(biglietto);
     }
 
-    public <Biglietto, Biglietto> Biglietto getBigliettoById(int bigliettoId) {
+    @Override
+    public Biglietto getBigliettoById(int bigliettoId) {
         return entityManager.find(Biglietto.class, bigliettoId);
     }
 
@@ -37,7 +39,7 @@ public abstract class BigliettoDaoImp<endDate> implements BigliettoDao {
 
     @Override
     public List<Biglietto> getBigliettiByPeriod(Date startDate, Date endDate) {
-        Query query = entityManager.createQuery("SELECT t FROM Biglietto t WHERE t.issueDate BETWEEN :startDate AND :endDate");
+        Query query = entityManager.createQuery("SELECT t FROM Biglietto t WHERE t.emissionDateTime BETWEEN :startDate AND :endDate");
         query.setParameter("startDate", startDate);
         query.setParameter("endDate", endDate);
         return query.getResultList();
@@ -45,8 +47,20 @@ public abstract class BigliettoDaoImp<endDate> implements BigliettoDao {
 
     @Override
     public List<Biglietto> getBigliettiByPointOfSale(int pointOfSaleId) {
-        Query query = entityManager.createQuery("SELECT t FROM Ticket t WHERE t.pointOfSale.id = :pointOfSaleId");
+        Query query = entityManager.createQuery("SELECT t FROM Biglietto t WHERE t.emissionPoint.id = :pointOfSaleId");
         query.setParameter("pointOfSaleId", pointOfSaleId);
         return query.getResultList();
     }
+
+	@Override
+	public List<Biglietto> getTicketsByPeriod(Date startDate, Date endDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Biglietto> getTicketsByPointOfSale(int pointOfSaleId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

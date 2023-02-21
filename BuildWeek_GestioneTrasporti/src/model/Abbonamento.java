@@ -1,29 +1,111 @@
 package model;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 @Entity
-public class Abbonamento {
+@NamedQuery(name = "Abbonamento.findAll", query = "SELECT a FROM Abbonamento a")
+@Table(name = "Abbonamento")
+public class Abbonamento<DistributoreAutomatico>{
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    
+    @Column(name = "code")
+    private String code;
+    
+    @Column(name = "emission_datetime")
+    private LocalDateTime emissionDateTime;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    
+    @JoinColumn(name = "emission_point_id")
+    private DistributoreAutomatico emissionPoint;
 
-	private String code;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    
+    @Column(name = "expiration_datetime")
+    private LocalDateTime expirationDateTime;
 
-	private LocalDateTime emissionDateTime;
+    // constructors, getters and setters
+    
+    public Abbonamento() {
+        // default constructor
+    }
 
-	@ManyToOne
-	@JoinColumn(name = "emission_point_id")
-	private EmissionPoint emissionPoint;
+    public Abbonamento(String code, LocalDateTime emissionDateTime, DistributoreAutomatico distributoreAutomatico, 
+                       User user, LocalDateTime expirationDateTime) {
+        this.code = code;
+        this.emissionDateTime = emissionDateTime;
+        this.emissionPoint = distributoreAutomatico;
+        this.user = user;
+        this.expirationDateTime = expirationDateTime;
+    }
+    
+    // getters and setters
+    
+    public int getId() {
+        return id;
+    }
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	private LocalDateTime expirationDateTime
+    public String getCode() {
+        return code;
+    }
 
-  // costruttori, getter e setter
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public LocalDateTime getEmissionDateTime() {
+        return emissionDateTime;
+    }
+
+    public void setEmissionDateTime(LocalDateTime emissionDateTime) {
+        this.emissionDateTime = emissionDateTime;
+    }
+
+    public DistributoreAutomatico getEmissionPoint() {
+        return emissionPoint;
+    }
+
+    public void setEmissionPoint(DistributoreAutomatico emissionPoint) {
+        this.emissionPoint = emissionPoint;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDateTime getExpirationDateTime() {
+        return expirationDateTime;
+    }
+
+    public void setExpirationDateTime(LocalDateTime expirationDateTime) {
+        this.expirationDateTime = expirationDateTime;
+    }
 }
+
+
 
 
 
