@@ -20,7 +20,7 @@ public class DistributoreAutomatico<EmissionPointType> {
 
     private boolean isActive;
 
-    public DistributoreAutomatico() {
+    public DistributoreAutomatico(String string) {
         // default constructor
     }
 
@@ -85,6 +85,16 @@ public class DistributoreAutomatico<EmissionPointType> {
 	public static Object getDistributoreAutomatico(String string, List<DistributoreAutomatico> distributori) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void carica_cassa(double d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public double get_cassa() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

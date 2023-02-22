@@ -99,5 +99,10 @@ public class Tratta {
     public void setViaggio(Viaggio viaggio) {
         this.viaggio = viaggio;
     }
+
+	public int get_distance() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 

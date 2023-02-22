@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Tessera {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataScadenza;
     
-    public Tessera() {}
+    public Tessera(String string, LocalDateTime localDateTime, User user) {}
     
     public Tessera(String codice, Date dataEmissione, Date dataScadenza) {
         this.codice = codice;
@@ -67,6 +68,16 @@ public class Tessera {
     public void setDataScadenza(Date dataScadenza) {
         this.dataScadenza = dataScadenza;
     }
+
+	public double get_saldo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void aggiungi_saldo(double d) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }
 

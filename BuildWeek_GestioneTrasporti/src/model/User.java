@@ -65,6 +65,11 @@ public class User {
     query.setParameter("cardNumber", cardNumber);
     return query.getSingleResult();
   }
+
+public boolean check_password(String string) {
+	// TODO Auto-generated method stub
+	return false;
+}
 }
 
 

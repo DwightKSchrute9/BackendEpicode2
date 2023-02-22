@@ -46,7 +46,7 @@ public class Abbonamento<DistributoreAutomatico>{
 
     // constructors, getters and setters
     
-    public Abbonamento() {
+    public Abbonamento(Tratta tratta, LocalDateTime localDateTime, LocalDateTime localDateTime2, double d) {
         // default constructor
     }
 
@@ -108,6 +108,11 @@ public class Abbonamento<DistributoreAutomatico>{
     public void setExpirationDateTime(LocalDateTime expirationDateTime) {
         this.expirationDateTime = expirationDateTime;
     }
+
+	public double getPrezzo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 
 

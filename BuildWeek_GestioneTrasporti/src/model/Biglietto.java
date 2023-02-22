@@ -48,7 +48,7 @@ public class Biglietto<EmissionPoint, Viaggio> {
 
   
 
-  public Biglietto() {
+  public Biglietto(Tratta tratta, LocalDateTime localDateTime, double d) {
     // default constructor
   }
 

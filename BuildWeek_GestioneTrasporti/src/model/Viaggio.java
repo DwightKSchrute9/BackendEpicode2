@@ -20,7 +20,7 @@ private Double prezzo;
 @OneToMany(mappedBy = "viaggio", cascade = CascadeType.ALL, orphanRemoval = true)
 private List<Tratta> tratte = new ArrayList<>();
 
-public Viaggio() {
+public Viaggio(Biglietto biglietto, Abbonamento abbonamento, Tessera tessera, DistributoreAutomatico distributore) {
 // default constructor
 }
 
@@ -90,5 +90,20 @@ public List<Viaggio> getViaggiByTrattaId(Long trattaId, EntityManager em) {
 TypedQuery<Viaggio> query = em.createNamedQuery("findViaggiByTrattaId", Viaggio.class);
 query.setParameter("trattaId", trattaId);
 return query.getResultList();
+}
+
+public double get_sconto_abbonamento() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+public double get_sconto_tessera() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+public double paga(double d) {
+	// TODO Auto-generated method stub
+	return 0;
 }
 }

@@ -22,7 +22,7 @@ public class Prenotazione {
   @ManyToOne
   private Viaggio viaggio;
 
-  public Prenotazione() {
+  public Prenotazione(Biglietto biglietto, User user2, LocalDateTime localDateTime) {
     // default constructor
   }
 
@@ -88,5 +88,20 @@ public class Prenotazione {
     query.setParameter("viaggio", viaggio);
     return query.getResultList();
   }
+
+public Object get_stato() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public double getPrezzo() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+public void conferma() {
+	// TODO Auto-generated method stub
+	
+}
 
 }
