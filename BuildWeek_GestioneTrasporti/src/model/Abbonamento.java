@@ -9,11 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@SuppressWarnings("hiding")
 @Entity
-@NamedQuery(name = "Abbonamento.findAll", query = "SELECT a FROM Abbonamento a")
+@NamedQueries({
+    @NamedQuery(name = "Abbonamento.findAll", query = "SELECT a FROM Abbonamento a"),
+    @NamedQuery(name = "Abbonamento.findByUser", query = "SELECT a FROM Abbonamento a WHERE a.user = :user")
+})
 @Table(name = "Abbonamento")
 public class Abbonamento<DistributoreAutomatico>{
     

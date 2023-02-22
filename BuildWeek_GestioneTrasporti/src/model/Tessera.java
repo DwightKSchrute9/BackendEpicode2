@@ -4,10 +4,16 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+  @NamedQuery(name = "findAllTessere", query = "SELECT t FROM Tessera t"),
+  @NamedQuery(name = "findTesseraByCodice", query = "SELECT t FROM Tessera t WHERE t.codice = :codice")
+})
 public class Tessera {
     
     @Id
@@ -63,3 +69,4 @@ public class Tessera {
     }
     
 }
+

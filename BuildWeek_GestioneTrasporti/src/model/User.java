@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
+@NamedQuery(name = "User.findByCardNumber", query = "SELECT u FROM User u WHERE u.cardNumber = :cardNumber")
 public class User {
 
   @Id
@@ -58,5 +59,12 @@ public class User {
   public void setCardNumber(String cardNumber) {
     this.cardNumber = cardNumber;
   }
+
+  public static User findUserByCardNumber(String cardNumber, EntityManager em) {
+    TypedQuery<User> query = em.createNamedQuery("User.findByCardNumber", User.class);
+    query.setParameter("cardNumber", cardNumber);
+    return query.getSingleResult();
+  }
 }
+
 

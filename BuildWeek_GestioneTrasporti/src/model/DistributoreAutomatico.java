@@ -1,8 +1,12 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
-@Entity
+@NamedQueries({
+    @NamedQuery(name = "findDistributorByName", query = "SELECT d FROM DistributoreAutomatico d WHERE d.name = :name")
+})
 public class DistributoreAutomatico<EmissionPointType> {
 
     @Id
@@ -57,5 +61,32 @@ public class DistributoreAutomatico<EmissionPointType> {
     public void setActive(boolean isActive) {
         this.isActive = isActive;
     }
+
+	public void setIndirizzo(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setLatitudine(double d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setLongitudine(double d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getIndirizzo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getDistributoreAutomatico(String string, List<DistributoreAutomatico> distributori) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
 

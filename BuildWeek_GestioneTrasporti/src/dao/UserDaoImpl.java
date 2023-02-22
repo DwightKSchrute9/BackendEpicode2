@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,9 +67,27 @@ public class UserDaoImpl implements UserDao {
         transaction.commit();
     }
 
+    public List<User> findUsersByCardNumber(String cardNumber) {
+        String jpql = "SELECT u FROM User u WHERE u.cardNumber = :cardNumber";
+        TypedQuery<User> query = em.createQuery(jpql, User.class);
+        query.setParameter("cardNumber", cardNumber);
+
+        return query.getResultList();
+    }
+
+    public List<User> findUsersByDateRange(Date startDate, Date endDate) {
+        String jpql = "SELECT u FROM User u WHERE u.cardNumber IN (SELECT t.tessera.user.cardNumber FROM Tessera t WHERE t.dataEmissione BETWEEN :startDate AND :endDate)";
+        TypedQuery<User> query = em.createQuery(jpql, User.class);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+
+        return query.getResultList();
+    }
+
     public void close() {
         em.close();
         emf.close();
     }
 }
+
 
