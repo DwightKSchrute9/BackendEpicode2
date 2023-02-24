@@ -22,15 +22,19 @@ public class Prenotazione {
   @ManyToOne
   private Viaggio viaggio;
 
-  public Prenotazione(Biglietto biglietto, User user2, LocalDateTime localDateTime) {
+  @OneToMany(mappedBy = "prenotazione", cascade = CascadeType.ALL)
+  private List<Biglietto> biglietti;
+
+  public Prenotazione() {
     // default constructor
   }
 
-  public Prenotazione(LocalDateTime dataPrenotazione, Boolean confermata, User user, Viaggio viaggio) {
+  public Prenotazione(LocalDateTime dataPrenotazione, Boolean confermata, User user, Viaggio viaggio, List<Biglietto> biglietti) {
     this.dataPrenotazione = dataPrenotazione;
     this.confermata = confermata;
     this.user = user;
     this.viaggio = viaggio;
+    this.biglietti = biglietti;
   }
 
   public Long getId() {
@@ -73,35 +77,33 @@ public class Prenotazione {
     this.viaggio = viaggio;
   }
 
+  public List<Biglietto> getBiglietti() {
+    return biglietti;
+  }
+
+  public void setBiglietti(List<Biglietto> biglietti) {
+    this.biglietti = biglietti;
+  }
+
   public static Prenotazione findById(Long id, EntityManager em) {
     return em.find(Prenotazione.class, id);
   }
 
   public static List<Prenotazione> findByUser(User user, EntityManager em) {
-    TypedQuery<Prenotazione> query = em.createNamedQuery("findPrenotazioniByUser", Prenotazione.class);
+    TypedQuery<Prenotazione> query = em.createQuery("SELECT p FROM Prenotazione p WHERE p.user = :user", Prenotazione.class);
     query.setParameter("user", user);
     return query.getResultList();
   }
 
-  public static List<Prenotazione> findByViaggio(Viaggio viaggio, EntityManager em) {
-    TypedQuery<Prenotazione> query = em.createNamedQuery("findPrenotazioniByViaggio", Prenotazione.class);
-    query.setParameter("viaggio", viaggio);
-    return query.getResultList();
+  public void aggiungi(Biglietto biglietto) throws Exception {
+    if (biglietti.contains(biglietto)) {
+      throw new Exception("Questo biglietto è già stato prenotato!");
+    }
+    biglietti.add(biglietto);
+    biglietto.setPrenotazione(this);
   }
 
-public Object get_stato() {
-	// TODO Auto-generated method stub
-	return null;
 }
 
-public double getPrezzo() {
-	// TODO Auto-generated method stub
-	return 0;
-}
 
-public void conferma() {
-	// TODO Auto-generated method stub
-	
-}
 
-}

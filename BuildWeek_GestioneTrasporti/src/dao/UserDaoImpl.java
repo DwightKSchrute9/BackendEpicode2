@@ -88,6 +88,13 @@ public class UserDaoImpl implements UserDao {
         em.close();
         emf.close();
     }
+
+	public static void add(User marco) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
 
 

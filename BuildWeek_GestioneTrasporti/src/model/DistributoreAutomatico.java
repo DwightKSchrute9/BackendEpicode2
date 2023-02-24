@@ -4,30 +4,39 @@ import java.util.List;
 
 import javax.persistence.*;
 
+@Entity
 @NamedQueries({
     @NamedQuery(name = "findDistributorByName", query = "SELECT d FROM DistributoreAutomatico d WHERE d.name = :name")
 })
-public class DistributoreAutomatico<EmissionPointType> {
+public class DistributoreAutomatico<T> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private EmissionPointType type;
-
     private String name;
 
     private boolean isActive;
 
-    public DistributoreAutomatico(String string) {
+    private String indirizzo;
+
+    private double latitudine;
+
+    private double longitudine;
+
+    private double cassa;
+
+    public DistributoreAutomatico() {
         // default constructor
     }
 
-    public DistributoreAutomatico(EmissionPointType type, String name, boolean isActive) {
-        this.type = type;
+    public DistributoreAutomatico(String name, boolean isActive, String indirizzo, double latitudine, double longitudine, double cassa) {
         this.name = name;
         this.isActive = isActive;
+        this.indirizzo = indirizzo;
+        this.latitudine = latitudine;
+        this.longitudine = longitudine;
+        this.cassa = cassa;
     }
 
     public Long getId() {
@@ -36,14 +45,6 @@ public class DistributoreAutomatico<EmissionPointType> {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public EmissionPointType getType() {
-        return type;
-    }
-
-    public void setType(EmissionPointType type) {
-        this.type = type;
     }
 
     public String getName() {
@@ -62,41 +63,51 @@ public class DistributoreAutomatico<EmissionPointType> {
         this.isActive = isActive;
     }
 
-	public void setIndirizzo(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+    public String getIndirizzo() {
+        return indirizzo;
+    }
 
-	public void setLatitudine(double d) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
 
-	public void setLongitudine(double d) {
-		// TODO Auto-generated method stub
-		
-	}
+    public double getLatitudine() {
+        return latitudine;
+    }
 
-	public String getIndirizzo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void setLatitudine(double latitudine) {
+        this.latitudine = latitudine;
+    }
 
-	public static Object getDistributoreAutomatico(String string, List<DistributoreAutomatico> distributori) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public double getLongitudine() {
+        return longitudine;
+    }
 
-	public void carica_cassa(double d) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setLongitudine(double longitudine) {
+        this.longitudine = longitudine;
+    }
 
-	public double get_cassa() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public double getCassa() {
+        return cassa;
+    }
 
+    public void setCassa(double cassa) {
+        this.cassa = cassa;
+    }
+
+    public static DistributoreAutomatico getDistributoreAutomatico(String name, List<DistributoreAutomatico> distributori) {
+        for (DistributoreAutomatico d : distributori) {
+            if (d.getName().equals(name)) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    public void caricaCassa(double amount) {
+        this.cassa += amount;
+    }
 
 }
+
 

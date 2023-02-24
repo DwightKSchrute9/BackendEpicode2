@@ -1,27 +1,40 @@
 package model;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.TypedQuery;
+
 @Entity
 public class Stazione {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
 
-    @OneToMany(mappedBy = "partenza", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tratta> tratteInPartenza = new ArrayList<>();
+    @OneToMany(mappedBy = "stazionePartenza", cascade = CascadeType.ALL)
+    private List<Viaggio> viaggiInPartenza;
 
-    @OneToMany(mappedBy = "arrivo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tratta> tratteInArrivo = new ArrayList<>();
+    @OneToMany(mappedBy = "stazioneArrivo", cascade = CascadeType.ALL)
+    private List<Viaggio> viaggiInArrivo;
 
-    public Stazione() {}
+    public Stazione() {
+        // Costruttore vuoto richiesto da JPA
+    }
 
     public Stazione(String nome) {
         this.nome = nome;
+        this.viaggiInPartenza = new ArrayList<>();
+        this.viaggiInArrivo = new ArrayList<>();
     }
 
     public Long getId() {
@@ -40,20 +53,47 @@ public class Stazione {
         this.nome = nome;
     }
 
-    public List<Tratta> getTratteInPartenza() {
-        return tratteInPartenza;
+    public List<Viaggio> getViaggiInPartenza() {
+        return viaggiInPartenza;
     }
 
-    public void setTratteInPartenza(List<Tratta> tratteInPartenza) {
-        this.tratteInPartenza = tratteInPartenza;
+    public void setViaggiInPartenza(List<Viaggio> viaggiInPartenza) {
+        this.viaggiInPartenza = viaggiInPartenza;
     }
 
-    public List<Tratta> getTratteInArrivo() {
-        return tratteInArrivo;
+    public List<Viaggio> getViaggiInArrivo() {
+        return viaggiInArrivo;
     }
 
-    public void setTratteInArrivo(List<Tratta> tratteInArrivo) {
-        this.tratteInArrivo = tratteInArrivo;
+    public void setViaggiInArrivo(List<Viaggio> viaggiInArrivo) {
+        this.viaggiInArrivo = viaggiInArrivo;
+    }
+
+    public void addViaggioInPartenza(Viaggio viaggio) {
+        viaggiInPartenza.add(viaggio);
+        viaggio.setStazionePartenza(this);
+    }
+
+    public void removeViaggioInPartenza(Viaggio viaggio) {
+        viaggiInPartenza.remove(viaggio);
+        viaggio.setStazionePartenza(null);
+    }
+
+    public void addViaggioInArrivo(Viaggio viaggio) {
+        viaggiInArrivo.add(viaggio);
+        viaggio.setStazioneArrivo(this);
+    }
+
+    public void removeViaggioInArrivo(Viaggio viaggio) {
+        viaggiInArrivo.remove(viaggio);
+        Tratta tratta = viaggio.getTratte().stream()
+                .filter(t -> t.getStazioneArrivo().equals(this))
+                .findFirst()
+                .orElse(null);
+        if (tratta != null) {
+            viaggio.removeTratta(tratta);
+        }
+        viaggio.setStazioneArrivo(null);
     }
 
     public static List<Stazione> findAll(EntityManager em) {
@@ -65,24 +105,10 @@ public class Stazione {
         return em.find(Stazione.class, id);
     }
 
-    public static Stazione findByNome(String nome, EntityManager em) {
-        TypedQuery<Stazione> query = em.createNamedQuery("findStazioneByNome", Stazione.class);
-        query.setParameter("nome", nome);
-        return query.getSingleResult();
-    }
-
-    public List<Tratta> getTratteInPartenzaByData(String data, EntityManager em) {
-        TypedQuery<Tratta> query = em.createNamedQuery("findTratteInPartenzaByData", Tratta.class);
-        query.setParameter("partenzaId", this.getId());
-        query.setParameter("data", data);
-        return query.getResultList();
-    }
-
-    public List<Tratta> getTratteInArrivoByData(String data, EntityManager em) {
-        TypedQuery<Tratta> query = em.createNamedQuery("findTratteInArrivoByData", Tratta.class);
-        query.setParameter("arrivoId", this.getId());
-        query.setParameter("data", data);
-        return query.getResultList();
-    }
 }
+
+
+
+
+
 

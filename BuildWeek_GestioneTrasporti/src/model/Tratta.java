@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-
+import model.Viaggio;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "findTrattaByViaggioId", query = "SELECT t FROM Tratta t WHERE t.viaggio.id = :idViaggio"),
@@ -28,6 +28,11 @@ public class Tratta {
     private Integer numeroPercorsi;
 
     private Integer tempoEffettivoPercorrenza;
+    
+    private String stazionePartenza;
+    
+    private String stazioneArrivo;
+
 
     @ManyToOne
     private Viaggio viaggio;
@@ -42,6 +47,8 @@ public class Tratta {
         this.numeroPercorsi = numeroPercorsi;
         this.tempoEffettivoPercorrenza = tempoEffettivoPercorrenza;
         this.viaggio = viaggio;
+       
+
     }
 
     public Long getId() {
@@ -104,5 +111,21 @@ public class Tratta {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public Object getStazioneArrivo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	  public void setStazionePartenza(String stazionePartenza) {
+	        this.stazionePartenza = stazionePartenza;
+	    }
+
+	    public void setStazioneArrivo(String stazioneArrivo) {
+	        this.stazioneArrivo = stazioneArrivo;
+	    }
+	    
+
 }
 

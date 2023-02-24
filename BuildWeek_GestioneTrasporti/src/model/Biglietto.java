@@ -1,66 +1,42 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import javax.persistence.*;
-
-@SuppressWarnings("hiding")
 @Entity
-@Table(name = "biglietto")
-@NamedQueries({
-  @NamedQuery(name = "Biglietto.findByCodice", query = "SELECT b FROM Biglietto b WHERE b.codice = :codice"),
-  @NamedQuery(name = "Biglietto.findByDataEmissione", query = "SELECT b FROM Biglietto b WHERE b.dataEmissione = :dataEmissione"),
-  @NamedQuery(name = "Biglietto.findByUser", query = "SELECT b FROM Biglietto b WHERE b.user = :user"),
-  @NamedQuery(name = "Biglietto.findByViaggio", query = "SELECT b FROM Biglietto b WHERE b.viaggio = :viaggio"),
-  @NamedQuery(name = "Biglietto.findByEmissionPoint", query = "SELECT b FROM Biglietto b WHERE b.emissionPoint = :emissionPoint")
-})
-public class Biglietto<EmissionPoint, Viaggio> {
+public class Biglietto<E extends DistributoreAutomatico, T extends Mezzo> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String codice;
+  @ManyToOne
+  private E partenza;
+
+  @ManyToOne
+  private E arrivo;
+
+  @ManyToOne
+  private T mezzo;
+  
+  @ManyToOne
+  @JoinColumn(name = "prenotazione_id")
+  private Prenotazione prenotazione;
+
 
   private Double prezzo;
 
-  @Column(name = "emission_date_time")
-  private LocalDateTime emissionDateTime;
+  public Biglietto() {}
 
-  @Column(name = "data_emissione")
-  private LocalDate dataEmissione;
-
-  
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
-  private User user;
-
-  
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "emission_point_id")
-  private DistributoreAutomatico<?> emissionPoint;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "viaggio_id")
-  private Tratta viaggio;
-
-  
-
-  public Biglietto(Tratta tratta, LocalDateTime localDateTime, double d) {
-    // default constructor
-  }
-
-  public Biglietto(String codice, Double prezzo, LocalDateTime emissionDateTime, LocalDate dataEmissione,
-      EmissionPoint emissionPoint, User user, Viaggio viaggio) {
-    this.codice = codice;
+  public Biglietto(E partenza, E arrivo, T mezzo, Double prezzo) {
+    this.partenza = partenza;
+    this.arrivo = arrivo;
+    this.mezzo = mezzo;
     this.prezzo = prezzo;
-    this.emissionDateTime = emissionDateTime;
-    this.dataEmissione = dataEmissione;
-    this.emissionPoint = (DistributoreAutomatico<?>) emissionPoint;
-    this.user = user;
-    this.viaggio = (Tratta) viaggio;
   }
 
   public Long getId() {
@@ -71,12 +47,28 @@ public class Biglietto<EmissionPoint, Viaggio> {
     this.id = id;
   }
 
-  public String getCodice() {
-    return codice;
+  public E getPartenza() {
+    return partenza;
   }
 
-  public void setCodice(String codice) {
-    this.codice = codice;
+  public void setPartenza(E partenza) {
+    this.partenza = partenza;
+  }
+
+  public E getArrivo() {
+    return arrivo;
+  }
+
+  public void setArrivo(E arrivo) {
+    this.arrivo = arrivo;
+  }
+
+  public T getMezzo() {
+    return mezzo;
+  }
+
+  public void setMezzo(T mezzo) {
+    this.mezzo = mezzo;
   }
 
   public Double getPrezzo() {
@@ -87,63 +79,9 @@ public class Biglietto<EmissionPoint, Viaggio> {
     this.prezzo = prezzo;
   }
 
-  public LocalDateTime getEmissionDateTime() {
-    return emissionDateTime;
-  }
+public void setPrenotazione(Prenotazione prenotazione2) {
+	// TODO Auto-generated method stub
+	
+}
 
-  public void setEmissionDateTime(LocalDateTime emissionDateTime) {
-    this.emissionDateTime = emissionDateTime;
-  }
-
-  public LocalDate getDataEmissione() {
-    return dataEmissione;
-  }
-
-  public void setDataEmissione(LocalDate dataEmissione) {
-    this.dataEmissione = dataEmissione;
-  }
-
-  @SuppressWarnings("unchecked")
-public EmissionPoint getEmissionPoint() {
-    return (EmissionPoint) emissionPoint;
-  }
-
-  public void setEmissionPoint(EmissionPoint emissionPoint) {
-    this.emissionPoint = (DistributoreAutomatico<?>) emissionPoint;
-  }
-
-  public User getUser() {
-	    return user;
-	  }
-
-	  public void setUser(User user) {
-	    this.user = user;
-	  }
-
-	  @SuppressWarnings("unchecked")
-	public Viaggio getViaggio() {
-	    return (Viaggio) viaggio;
-	  }
-
-	  public void setViaggio(Viaggio viaggio) {
-	    this.viaggio = (Tratta) viaggio;
-	  }
-	  @Override
-	  public boolean equals(Object o) {
-	      if (this == o) return true;
-	      if (o == null || getClass() != o.getClass()) return false;
-	      Biglietto<?, ?> biglietto = (Biglietto<?, ?>) o;
-	      return Objects.equals(codice, biglietto.codice) &&
-	              Objects.equals(emissionDateTime, biglietto.emissionDateTime) &&
-	              Objects.equals(user, biglietto.user) &&
-	              Objects.equals(emissionPoint, biglietto.emissionPoint) &&
-	              Objects.equals(viaggio, biglietto.viaggio);
-	  }
-
-	  @Override
-	  public int hashCode() {
-	      return Objects.hash(codice, emissionDateTime, user, emissionPoint, viaggio);
-	  }
-
-	}
-
+}

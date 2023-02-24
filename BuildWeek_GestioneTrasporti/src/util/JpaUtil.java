@@ -1,24 +1,20 @@
 package util;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JpaUtil {
-    private static final String PERSISTENCE_UNIT_NAME = "BuildWeek_GestioneTrasporti";
-    private static EntityManagerFactory entityManagerFactory;
+private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("BuildWeek_GestioneTrasporti");
 
-    public static EntityManager getEntityManager() {
-        if (entityManagerFactory == null) {
-            entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        }
-        return entityManagerFactory.createEntityManager();
-    }
+private JpaUtil() {}
 
-    public static void close() {
-        if (entityManagerFactory != null) {
-            entityManagerFactory.close();
-        }
-    }
+public static EntityManager getJpEntityManager() {
+return emf.createEntityManager();
+}
+
+public static EntityManager getJpaEntityManager(EntityManagerFactory emf2) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

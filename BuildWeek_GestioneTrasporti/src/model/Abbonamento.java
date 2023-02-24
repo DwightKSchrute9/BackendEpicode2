@@ -1,5 +1,6 @@
 package model;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -13,14 +14,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@SuppressWarnings("hiding")
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Abbonamento.findAll", query = "SELECT a FROM Abbonamento a"),
     @NamedQuery(name = "Abbonamento.findByUser", query = "SELECT a FROM Abbonamento a WHERE a.user = :user")
 })
 @Table(name = "Abbonamento")
-public class Abbonamento<DistributoreAutomatico>{
+public class Abbonamento {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Abbonamento<DistributoreAutomatico>{
     @Column(name = "emission_datetime")
     private LocalDateTime emissionDateTime;
 
-    
+    @ManyToOne
     @JoinColumn(name = "emission_point_id")
     private DistributoreAutomatico emissionPoint;
 
@@ -46,15 +46,15 @@ public class Abbonamento<DistributoreAutomatico>{
 
     // constructors, getters and setters
     
-    public Abbonamento(Tratta tratta, LocalDateTime localDateTime, LocalDateTime localDateTime2, double d) {
+    public Abbonamento() {
         // default constructor
     }
 
-    public Abbonamento(String code, LocalDateTime emissionDateTime, DistributoreAutomatico distributoreAutomatico, 
+    public Abbonamento(String code, LocalDateTime emissionDateTime, DistributoreAutomatico emissionPoint, 
                        User user, LocalDateTime expirationDateTime) {
         this.code = code;
         this.emissionDateTime = emissionDateTime;
-        this.emissionPoint = distributoreAutomatico;
+        this.emissionPoint = emissionPoint;
         this.user = user;
         this.expirationDateTime = expirationDateTime;
     }
@@ -109,13 +109,14 @@ public class Abbonamento<DistributoreAutomatico>{
         this.expirationDateTime = expirationDateTime;
     }
 
-	public double getPrezzo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public double getPrezzo() {
+        // Calcola la durata dell'abbonamento in ore
+        long durataInOre = Duration.between(emissionDateTime, expirationDateTime).toHours();
+        
+        // Calcola il prezzo dell'abbonamento in base alla durata e al prezzo base
+        double prezzoBase = 10.0;  // Prezzo base dell'abbonamento
+        double prezzo = prezzoBase * Math.ceil(durataInOre / 24.0);  // Calcola il prezzo arrotondando per eccesso alla giornata successiva
+
+        return prezzo;
+    }
 }
-
-
-
-
-
