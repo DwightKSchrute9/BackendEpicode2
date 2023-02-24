@@ -22,14 +22,15 @@ public class Prenotazione {
   @ManyToOne
   private Viaggio viaggio;
 
-  @OneToMany(mappedBy = "prenotazione", cascade = CascadeType.ALL)
+  @SuppressWarnings("rawtypes")
+@OneToMany(mappedBy = "prenotazione", cascade = CascadeType.ALL)
   private List<Biglietto> biglietti;
 
   public Prenotazione() {
     // default constructor
   }
 
-  public Prenotazione(LocalDateTime dataPrenotazione, Boolean confermata, User user, Viaggio viaggio, List<Biglietto> biglietti) {
+  public Prenotazione(LocalDateTime dataPrenotazione, Boolean confermata, User user, Viaggio viaggio, @SuppressWarnings("rawtypes") List<Biglietto> biglietti) {
     this.dataPrenotazione = dataPrenotazione;
     this.confermata = confermata;
     this.user = user;
@@ -77,11 +78,12 @@ public class Prenotazione {
     this.viaggio = viaggio;
   }
 
-  public List<Biglietto> getBiglietti() {
+  @SuppressWarnings("rawtypes")
+public List<Biglietto> getBiglietti() {
     return biglietti;
   }
 
-  public void setBiglietti(List<Biglietto> biglietti) {
+  public void setBiglietti(@SuppressWarnings("rawtypes") List<Biglietto> biglietti) {
     this.biglietti = biglietti;
   }
 
@@ -95,7 +97,7 @@ public class Prenotazione {
     return query.getResultList();
   }
 
-  public void aggiungi(Biglietto biglietto) throws Exception {
+  public void aggiungi(Biglietto<?, ?> biglietto) throws Exception {
     if (biglietti.contains(biglietto)) {
       throw new Exception("Questo biglietto è già stato prenotato!");
     }

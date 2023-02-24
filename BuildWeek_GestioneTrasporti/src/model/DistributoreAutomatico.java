@@ -95,8 +95,9 @@ public class DistributoreAutomatico<T> {
         this.cassa = cassa;
     }
 
-    public static DistributoreAutomatico getDistributoreAutomatico(String name, List<DistributoreAutomatico> distributori) {
-        for (DistributoreAutomatico d : distributori) {
+    @SuppressWarnings("rawtypes")
+	public static DistributoreAutomatico<?> getDistributoreAutomatico(String name, List<DistributoreAutomatico> distributori) {
+        for (DistributoreAutomatico<?> d : distributori) {
             if (d.getName().equals(name)) {
                 return d;
             }

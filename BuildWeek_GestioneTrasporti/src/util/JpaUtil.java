@@ -5,16 +5,19 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JpaUtil {
-private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("BuildWeek_GestioneTrasporti");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("BuildWeek_GestioneTrasporti");
 
-private JpaUtil() {}
+    private JpaUtil() {}
 
-public static EntityManager getJpEntityManager() {
-return emf.createEntityManager();
-}
+    public static EntityManager getJpaEntityManager() {
+        return emf.createEntityManager();
+    }
 
-public static EntityManager getJpaEntityManager(EntityManagerFactory emf2) {
-	// TODO Auto-generated method stub
-	return null;
-}
+    public static EntityManager getJpaEntityManager(EntityManagerFactory emf) {
+        return emf.createEntityManager();
+    }
+
+    public static void closeEntityManagerFactory() {
+        emf.close();
+    }
 }

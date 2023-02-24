@@ -11,7 +11,7 @@ import util.JpaUtil;
 public class Main {
   public static void main(String[] args) {
     // creazione entity manager factory
-	  EntityManagerFactory emf = Persistence.createEntityManagerFactory("cb");
+	  EntityManagerFactory emf = Persistence.createEntityManagerFactory("BuildWeek_GestioneTrasporti");
 
     // creazione entity manager
     EntityManager em = JpaUtil.getJpaEntityManager(emf);

@@ -1,31 +1,36 @@
+
 package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.TypedQuery;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Stazione.findAll", query = "SELECT s FROM Stazione s"),
+    @NamedQuery(name = "Stazione.findById", query = "SELECT s FROM Stazione s WHERE s.id = :id")
+})
 public class Stazione {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
 
-    @OneToMany(mappedBy = "stazionePartenza", cascade = CascadeType.ALL)
-    private List<Viaggio> viaggiInPartenza;
+    @OneToMany(mappedBy = "stazionePartenza")
+    private List<Viaggio> viaggiInPartenza = new ArrayList<>();
 
-    @OneToMany(mappedBy = "stazioneArrivo", cascade = CascadeType.ALL)
-    private List<Viaggio> viaggiInArrivo;
+    @OneToMany(mappedBy = "stazioneArrivo")
+    private List<Viaggio> viaggiInArrivo = new ArrayList<>();
 
     public Stazione() {
         // Costruttore vuoto richiesto da JPA
@@ -97,18 +102,14 @@ public class Stazione {
     }
 
     public static List<Stazione> findAll(EntityManager em) {
-        TypedQuery<Stazione> query = em.createQuery("SELECT s FROM Stazione s", Stazione.class);
+        TypedQuery<Stazione> query = em.createNamedQuery("Stazione.findAll", Stazione.class);
         return query.getResultList();
     }
 
     public static Stazione findById(Long id, EntityManager em) {
-        return em.find(Stazione.class, id);
+        TypedQuery<Stazione> query = em.createNamedQuery("Stazione.findById", Stazione.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
-
 }
-
-
-
-
-
 

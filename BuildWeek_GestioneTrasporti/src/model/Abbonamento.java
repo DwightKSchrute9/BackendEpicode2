@@ -35,7 +35,7 @@ public class Abbonamento {
 
     @ManyToOne
     @JoinColumn(name = "emission_point_id")
-    private DistributoreAutomatico emissionPoint;
+    private DistributoreAutomatico<?> emissionPoint;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -50,7 +50,7 @@ public class Abbonamento {
         // default constructor
     }
 
-    public Abbonamento(String code, LocalDateTime emissionDateTime, DistributoreAutomatico emissionPoint, 
+    public Abbonamento(String code, LocalDateTime emissionDateTime, DistributoreAutomatico<?> emissionPoint, 
                        User user, LocalDateTime expirationDateTime) {
         this.code = code;
         this.emissionDateTime = emissionDateTime;
@@ -85,11 +85,11 @@ public class Abbonamento {
         this.emissionDateTime = emissionDateTime;
     }
 
-    public DistributoreAutomatico getEmissionPoint() {
+    public DistributoreAutomatico<?> getEmissionPoint() {
         return emissionPoint;
     }
 
-    public void setEmissionPoint(DistributoreAutomatico emissionPoint) {
+    public void setEmissionPoint(DistributoreAutomatico<?> emissionPoint) {
         this.emissionPoint = emissionPoint;
     }
 

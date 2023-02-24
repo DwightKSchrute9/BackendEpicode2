@@ -8,31 +8,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Biglietto<E extends DistributoreAutomatico, T extends Mezzo> {
+public class Biglietto<E extends DistributoreAutomatico<?>, T extends Mezzo> {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+	@ManyToOne(targetEntity = Stazione.class)
+	@JoinColumn(name = "id_stazione_partenza")
+	private Stazione partenza;
 
-  @ManyToOne
-  private E partenza;
 
-  @ManyToOne
+  @ManyToOne(targetEntity = DistributoreAutomatico.class)
   private E arrivo;
 
-  @ManyToOne
+
+  @ManyToOne(targetEntity = Mezzo.class)
   private T mezzo;
+
   
   @ManyToOne
   @JoinColumn(name = "prenotazione_id")
   private Prenotazione prenotazione;
 
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
   private Double prezzo;
 
   public Biglietto() {}
 
-  public Biglietto(E partenza, E arrivo, T mezzo, Double prezzo) {
+  public Biglietto(Stazione partenza, E arrivo, T mezzo, Double prezzo) {
     this.partenza = partenza;
     this.arrivo = arrivo;
     this.mezzo = mezzo;
@@ -47,11 +51,11 @@ public class Biglietto<E extends DistributoreAutomatico, T extends Mezzo> {
     this.id = id;
   }
 
-  public E getPartenza() {
+  public Stazione getPartenza() {
     return partenza;
   }
 
-  public void setPartenza(E partenza) {
+  public void setPartenza(Stazione partenza) {
     this.partenza = partenza;
   }
 
@@ -79,9 +83,7 @@ public class Biglietto<E extends DistributoreAutomatico, T extends Mezzo> {
     this.prezzo = prezzo;
   }
 
-public void setPrenotazione(Prenotazione prenotazione2) {
-	// TODO Auto-generated method stub
-	
-}
-
+  public void setPrenotazione(Prenotazione prenotazione2) {
+    // TODO Auto-generated method stub
+  }
 }

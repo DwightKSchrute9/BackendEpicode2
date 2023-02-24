@@ -5,20 +5,45 @@ import java.util.List;
 
 import javax.persistence.*;
 
+
 @Entity
 @NamedQuery(name = "findViaggiByTrattaId", query = "SELECT v FROM Viaggio v JOIN v.tratte t WHERE t.id = :trattaId")
 public class Viaggio {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    private String nome;
+        private String nome;
 
-    private Double prezzo;
+        private Double prezzo;
 
-    @OneToMany(mappedBy = "viaggio", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tratta> tratte = new ArrayList<>();
+        @OneToMany(mappedBy = "viaggio", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<Tratta> tratte = new ArrayList<>();
+
+        @ManyToOne
+        @JoinColumn(name = "partenza_id")
+        private Stazione stazionePartenza;
+
+        @ManyToOne
+        @JoinColumn(name = "arrivo_id")
+        private Stazione stazioneArrivo;
+
+        // costruttori, getter e setter
+
+        public void setStazionePartenza1(Stazione stazionePartenza) {
+            this.stazionePartenza = stazionePartenza;
+            stazionePartenza.getViaggiInPartenza().add(this);
+        }
+
+        public void setStazioneArrivo1(Stazione stazioneArrivo) {
+            this.stazioneArrivo = stazioneArrivo;
+            stazioneArrivo.getViaggiInArrivo().add(this);
+        }
+
+        // altre implementazioni dei metodi
+    
+
 
     public Viaggio() {
         // Costruttore vuoto richiesto da JPA
@@ -115,16 +140,33 @@ public class Viaggio {
         }
         return false;
     }
-
-	public void setStazioneArrivo(Object object) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setStazionePartenza(Stazione stazione) {
-		// TODO Auto-generated method stub
-		
-	}
+  
+            
+    public void setStazionePartenza(Stazione stazione) {
+        if (!tratte.isEmpty()) {
+            Tratta tratta = tratte.get(0);
+            tratta.setStazionePartenza(stazione);
+            stazione.getViaggiInPartenza().add(this);
+        }
+    }
+    
+    public void setStazioneArrivo(Stazione stazione) {
+        if (!tratte.isEmpty()) {
+            Tratta tratta = tratte.get(tratte.size() - 1);
+            tratta.setStazioneArrivo(stazione);
+            stazione.getViaggiInArrivo().add(this);
+        }
+    }
+    
+    public void setStazione(int index, Stazione stazione) {
+        if (index < tratte.size()) {
+            Tratta tratta = tratte.get(index);
+            tratta.setStazioneArrivo(stazione);
+            stazione.getViaggiInArrivo().add(this);
+        }
+    }
 }
+    
+
 
 
