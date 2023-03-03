@@ -1,5 +1,6 @@
 package com.godFathersPizza.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,7 @@ public abstract class Pizza extends Prodotto {
         super(nome, prezzo);
     }
 
-   
-	public void aggiungiIngrediente(String ingrediente) {
+    public void aggiungiIngrediente(String ingrediente) {
         ingredientiAggiunti.add(ingrediente);
     }
 
@@ -19,14 +19,12 @@ public abstract class Pizza extends Prodotto {
         return ingredientiAggiunti;
     }
 
-	public String getNome() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void setCalories(int i) {
+        // TODO Auto-generated method stub
 
-	public double getPrezzo() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    }
+
+    public abstract void setPrice(BigDecimal bigDecimal);
 }
+
 
