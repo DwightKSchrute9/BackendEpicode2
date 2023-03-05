@@ -2,13 +2,17 @@ package com.example.gestioneprenotazioni.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table (name = "utente")
 public class Utente {
   
   @Id
@@ -16,10 +20,16 @@ public class Utente {
   private Long id;
   
   // i campi nome e cognome possono essere utili per gestire il nome completo dell'utente
+  
+  @Column(nullable = false)
   private String nome;
+  
+  @Column(nullable = false)
   private String cognome;
   
   // un campo email può essere utile per contattare l'utente
+  
+  @Column(nullable = false, unique = true)
   private String email;
   
   // ogni utente può avere molte prenotazioni
