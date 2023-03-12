@@ -1,7 +1,5 @@
 package com.example.GestioneDispositivi.service;
 
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -35,14 +33,24 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-	public User updateUser(Long id, User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public User updateUser(Long id, User user) throws Exception {
+        User oldUser = userRepository.findById(id)
+                .orElseThrow(() -> new Exception("User not found"));
 
-	public void deleteUser(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
+        oldUser.setUsername(user.getUsername());
+        oldUser.setId(user.getId());
+        oldUser.setPassword(user.getPassword());
+        oldUser.setFirstName(user.getFirstName());
+        oldUser.setLastName(user.getLastName());
+        oldUser.setEmail(user.getEmail());
+
+        return userRepository.save(oldUser);
+    }
+
+    public void deleteUser(Long id) throws Exception {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new Exception("User not found"));
+
+        userRepository.delete(user);
+    }
 }
-

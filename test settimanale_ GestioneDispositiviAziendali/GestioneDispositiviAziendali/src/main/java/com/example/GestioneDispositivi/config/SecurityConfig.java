@@ -26,9 +26,12 @@ import com.example.GestioneDispositivi.security.JwtUserDetailsService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	/*
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
+    */
 
+	/*
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
@@ -38,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(this.userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
+    */
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -50,10 +54,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /*
     @Bean
     public JwtAuthenticationFilter authenticationTokenFilterBean() throws Exception {
         return new JwtAuthenticationFilter(null, userDetailsService, unauthorizedHandler);
     }
+    */
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -63,7 +69,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler)
+                .and()
+                .authorizeRequests()
+                .antMatchers("/api/**").permitAll();
+                /*.authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -72,10 +81,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/auth/**")
                 .permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated();*/
 
         // Add our custom JWT security filter
-        httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+        //httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
         // Disable page caching
         httpSecurity.headers().cacheControl();

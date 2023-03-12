@@ -64,13 +64,18 @@ public class DeviceService {
         return deviceRepository.save(device);
     }
     
-    public void deleteDevice(Comparable<Long> device) {
-        deviceRepository.delete((Device) device);
+    public void deleteDevice(Long deviceId) throws Exception {
+    	Device device = deviceRepository.findById(deviceId).orElseThrow(() -> new Exception("Device not found"));
+        deviceRepository.delete(device);
     }
 
-	public Device updateDevice(Long deviceId, Device device) {
-		// TODO Auto-generated method stub
-		return null;
+	public Device updateDevice(Long deviceId, Device d) throws Exception {
+		Device device = deviceRepository.findById(deviceId).orElseThrow(() -> new Exception("Device not found"));
+		device.setDescription(d.getDescription());
+		device.setName(d.getName());
+		device.setStatus(d.getStatus());
+		device.setUser(d.getUser());
+		return deviceRepository.save(device);
 	}
 }
 

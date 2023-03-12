@@ -19,7 +19,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
+	/*
     public JwtAuthenticationEntryPoint(UserDetails userDetails, Object object,
+			Collection<? extends GrantedAuthority> authorities) {
+		// TODO Auto-generated constructor stub
+	}
+	*/
+
+	public JwtAuthenticationEntryPoint(UserDetails userDetails, Object object,
 			Collection<? extends GrantedAuthority> authorities) {
 		// TODO Auto-generated constructor stub
 	}

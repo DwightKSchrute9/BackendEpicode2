@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "59728c3c-466e-4ebd-ae2a-ceafc4e92f69",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24808456"
+	},
+	"item": [
+		{
+			"name": "Get devices list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/devices/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"devices",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create device",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Smartphone 1\", \"description\": \"Some smart phone\", \"status\": \"AVAILABLE\"}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/devices/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"devices",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update device",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Smartphone 1\", \"description\": \"Some smart phone\", \"status\": \"AVAILABLE\"}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/devices/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"devices",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get device",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/devices/13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"devices",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete device",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/devices/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"devices",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

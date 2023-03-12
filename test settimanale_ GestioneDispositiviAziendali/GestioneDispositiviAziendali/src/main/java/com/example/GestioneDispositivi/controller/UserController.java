@@ -41,12 +41,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    public User updateUser(@PathVariable Long id, @RequestBody User user) throws Exception {
         return userService.updateUser(id, user);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    public void deleteUser(@PathVariable Long id) throws Exception {
         userService.deleteUser(id);
     }
 }
