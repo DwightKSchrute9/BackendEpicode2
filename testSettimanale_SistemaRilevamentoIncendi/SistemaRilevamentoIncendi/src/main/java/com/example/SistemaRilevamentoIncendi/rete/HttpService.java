@@ -7,3 +7,5 @@ public interface HttpService {
 
 	void setSmokeLevel(int smokeLevel);
 }
+
+

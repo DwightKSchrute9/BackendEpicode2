@@ -55,5 +55,10 @@ public class Sonda extends Observable {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		public void installaSonda() {
+			// TODO Auto-generated method stub
+			
+		}
     
 	}
