@@ -76,6 +76,11 @@ public class Utente {
 		return null;
 	}
 
+	public long getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
     // constructors, getters and setters, toString, etc.
 }
 
