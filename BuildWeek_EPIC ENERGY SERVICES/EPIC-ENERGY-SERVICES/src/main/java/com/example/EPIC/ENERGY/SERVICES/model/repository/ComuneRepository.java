@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.EPIC.ENERGY.SERVICES.model.Comune;
 
-public interface ComuneRepository extends JpaRepository<Comune, Long> {
 
+public interface ComuneRepository extends JpaRepository<Comune, Long> {
+    
+    Comune findByNomeIgnoreCase(String nome);
+    
 }

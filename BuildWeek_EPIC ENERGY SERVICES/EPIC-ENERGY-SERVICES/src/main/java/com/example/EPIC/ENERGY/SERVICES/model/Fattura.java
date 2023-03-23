@@ -63,5 +63,35 @@ public class Fattura {
 		this.numero = numero;
 	}
 
+	public Object getCliente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setCliente(Object cliente2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object getDataFattura() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getStato() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setDataFattura(Object dataFattura) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setStato(Object stato) {
+		// TODO Auto-generated method stub
+		
+	}
+
     // costruttori, getter e setter, metodi ausiliari
 }

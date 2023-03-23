@@ -46,6 +46,36 @@ public class Utente {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Ruolo> roles = new HashSet<>();
 
+	public Object getRuolo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String name() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getRuoli() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object stream() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
     // constructors, getters and setters, toString, etc.
 }
 
