@@ -65,4 +65,14 @@ public class ClienteService {
     public void deleteCliente(Long id) {
         clienteRepository.deleteById(id);
     }
+
+	public Cliente addCliente(Cliente cliente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Cliente updateCliente(Long id, Cliente cliente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

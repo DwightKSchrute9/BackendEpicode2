@@ -29,5 +29,10 @@ public class Comune {
 		this.nome = nome;
 	}
 
+	public void setId(Long id2) {
+		// TODO Auto-generated method stub
+		
+	}
+
     // costruttori, getter e setter, metodi ausiliari
 }

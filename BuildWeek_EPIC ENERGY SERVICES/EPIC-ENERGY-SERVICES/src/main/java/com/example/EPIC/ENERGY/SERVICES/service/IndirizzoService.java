@@ -40,4 +40,14 @@ public class IndirizzoService {
     public void deleteIndirizzo(Long id) {
         indirizzoRepository.deleteById(id);
     }
+
+	public Indirizzo createIndirizzo(Indirizzo indirizzo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Indirizzo updateIndirizzo(Long id, Indirizzo indirizzo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

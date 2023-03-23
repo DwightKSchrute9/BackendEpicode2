@@ -31,4 +31,19 @@ public class StatoFatturaService {
         statoFatturaRepository.deleteById(id);
     }
 
+	public StatoFattura createStatoFattura(StatoFattura statoFattura) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public StatoFattura updateStatoFattura(Long statoFatturaId, StatoFattura statoFatturaDetails) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteStatoFattura(Long statoFatturaId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

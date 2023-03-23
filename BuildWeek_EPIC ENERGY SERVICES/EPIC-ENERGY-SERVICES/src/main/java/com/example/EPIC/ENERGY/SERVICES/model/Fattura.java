@@ -2,6 +2,7 @@ package com.example.EPIC.ENERGY.SERVICES.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -89,6 +90,16 @@ public class Fattura {
 	}
 
 	public void setStato(Object stato) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Map<String, ?> getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setId(Long id2) {
 		// TODO Auto-generated method stub
 		
 	}

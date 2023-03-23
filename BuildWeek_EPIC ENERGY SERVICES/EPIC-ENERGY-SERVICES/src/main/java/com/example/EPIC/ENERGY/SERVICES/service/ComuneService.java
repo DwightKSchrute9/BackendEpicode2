@@ -31,4 +31,9 @@ public class ComuneService {
         comuneRepository.deleteById(id);
     }
 
+	public void deleteComune(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

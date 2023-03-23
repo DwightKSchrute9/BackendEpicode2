@@ -31,4 +31,24 @@ public class RuoloService {
         ruoloRepository.deleteById(id);
     }
 
+	public List<Ruolo> getRuoli() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Ruolo createRuolo(Ruolo ruolo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Ruolo updateRuolo(Long id, Ruolo ruolo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteRuolo(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

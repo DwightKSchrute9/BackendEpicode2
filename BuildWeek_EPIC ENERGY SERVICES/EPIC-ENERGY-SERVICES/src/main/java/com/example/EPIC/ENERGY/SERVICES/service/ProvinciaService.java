@@ -31,4 +31,19 @@ public class ProvinciaService {
         provinciaRepository.deleteById(id);
     }
 
+	public Provincia addProvincia(Provincia provincia) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Provincia updateProvincia(Provincia provincia) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean deleteProvincia(Long id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

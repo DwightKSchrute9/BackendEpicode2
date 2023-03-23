@@ -72,4 +72,19 @@ public class FatturaService {
         return repository.findByFilters(cliente, stato, dataInizio, dataFine, importoMin, importoMax);
     }
 
+	public Fattura createFattura(Fattura fattura) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Fattura updateFattura(Fattura fattura) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteFattura(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

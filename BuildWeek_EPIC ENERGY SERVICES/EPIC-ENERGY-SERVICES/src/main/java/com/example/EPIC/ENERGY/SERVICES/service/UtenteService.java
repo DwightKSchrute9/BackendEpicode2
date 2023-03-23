@@ -62,4 +62,29 @@ public class UtenteService {
     public List<Utente> findByNomeAndCognomeContainingIgnoreCase(String nome, String cognome) {
         return utenteRepository.findByNomeAndCognomeContainingIgnoreCase(nome, cognome);
     }
+
+	public List<Utente> getAllUtenti() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Utente getUtenteById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Utente createUtente(Utente utente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Utente updateUtente(Long id, Utente utente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteUtente(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
 }
