@@ -40,7 +40,7 @@ public class UtenteService {
     }
 
     public Optional<Utente> findByUsername(String username) {
-        return utenteRepository.findByUsername(username);
+        return Optional.ofNullable(utenteRepository.findByUsername(username));
     }
 
     public List<Utente> findByRuolo(Ruolo ruolo) {

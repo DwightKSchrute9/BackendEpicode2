@@ -12,4 +12,9 @@ public class Jwts {
 		return null;
 	}
 
+	public static Object claims() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

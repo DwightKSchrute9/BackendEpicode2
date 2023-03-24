@@ -73,6 +73,38 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Dipendenze per l'autenticazione con JWT -->
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.11.2</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-impl</artifactId>
+    <version>0.11.2</version>
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-jackson</artifactId>
+    <version>0.11.2</version>
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-web</artifactId>
+    <version>5.7.7</version>
+    
+</dependency>
+<dependency>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-csv</artifactId>
+  <version>1.8</version>
+</dependency>
+
+
+
 		
 	</dependencies>
 

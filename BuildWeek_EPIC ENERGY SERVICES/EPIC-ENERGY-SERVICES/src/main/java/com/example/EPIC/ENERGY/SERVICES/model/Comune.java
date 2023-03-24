@@ -34,5 +34,10 @@ public class Comune {
 		
 	}
 
+	public void setProvincia(Provincia provincia2) {
+		// TODO Auto-generated method stub
+		
+	}
+
     // costruttori, getter e setter, metodi ausiliari
 }

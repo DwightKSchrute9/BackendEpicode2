@@ -23,10 +23,10 @@ public class JwtTokenProvider {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpiration);
 
-        return ((Object) Jwts.builder())
+        return ((Object) ((io.jsonwebtoken.Claims) Jwts.builder())
                 .setSubject(Long.toString(user.getId()))
                 .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
+                .setExpiration(expiryDate))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
@@ -45,4 +45,9 @@ public class JwtTokenProvider {
         Claims claims = ((Object) Jwts.parser()).setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
         return Long.parseLong(claims.getSubject());
     }
+
+	public String createToken(io.jsonwebtoken.Claims claims) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

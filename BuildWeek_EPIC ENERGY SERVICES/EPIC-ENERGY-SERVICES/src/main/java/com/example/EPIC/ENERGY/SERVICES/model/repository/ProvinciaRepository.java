@@ -8,5 +8,7 @@ import com.example.EPIC.ENERGY.SERVICES.model.Provincia;
 public interface ProvinciaRepository extends JpaRepository<Provincia, Long> {
     
     Provincia findByNomeIgnoreCase(String nome);
+
+	Object findByNome(String string);
     
 }
